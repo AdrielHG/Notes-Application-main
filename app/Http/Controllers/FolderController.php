@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Folder;
 
-class CategoryController extends Controller
+class FolderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::get();
+        $folders = Folder::get();
 
-        return view('categories.index', compact('categories'));
+        return view('folders.index', compact('folders'));
     }
 
     /**
@@ -22,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view('folders.create');
     }
 
     /**
@@ -30,13 +30,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create([
+        Folder::create([
             'name'      => $request->name,
             'color'     => str_replace('#', '', $request->color),
-            'user_id'   => 1
+            'user_id'   => 1,
+            'categories_id' => 1
         ]);
 
-        return to_route('categories.index');
+        return to_route('folders.index');
     }
 
     /**
