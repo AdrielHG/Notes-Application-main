@@ -11,10 +11,10 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [FolderController::class, 'index']);
 Route::get('/', [CategoryController::class, 'index']);
-//Route::get('/', [NoteController::class, 'index']);
-//Route::get('/', [UserController::class, 'index']);
+Route::get('/', [NoteController::class, 'index']);
+Route::get('/', [UserController::class, 'index']);
 
 Route::resource('categories', CategoryController::class);
 Route::resource('folders', FolderController::class);
-//Route::resource('notes', NoteController::class);
-//Route::resource('users', UserController::class);
+Route::resource('notes', NoteController::class);
+Route::resource('users', UserController::class);
