@@ -17,6 +17,8 @@
             <tr>
                <th>ID</th> 
                <th>Name</th> 
+               <th>Actions</th>
+               <th>Delete</th>
             </tr>
         </thead>
 
@@ -25,6 +27,18 @@
                 <tr>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
+                    <td>
+                        <a href="{{ route('categories.show', $category->id) }}">See category</a>
+                        <a href="{{ route('categories.edit', $category->id) }}">Edit category</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+
+                            <input type="submit" value="Delete category">
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
