@@ -20,8 +20,7 @@ class FolderFactory extends Factory
         return [
             'name' => fake()->word(),
             'color' => str_replace('#', '', fake()->hexColor()),
-            'user_id' => 1,
-            'categories_id' => 1,
+            'user_id' => 1
         ];
     }
 }

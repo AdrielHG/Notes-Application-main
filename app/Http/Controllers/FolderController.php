@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Folder;
+use App\Models\User;
 
 class FolderController extends Controller
 {
@@ -33,8 +34,7 @@ class FolderController extends Controller
         Folder::create([
             'name'      => $request->name,
             'color'     => str_replace('#', '', $request->color),
-            'user_id'   => 1,
-            'categories_id' => 1
+            'user_id'   => 1
         ]);
 
         return to_route('folders.index');
@@ -45,15 +45,17 @@ class FolderController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $folder = Folder::find($id);
+        $user = User::find($folder->user_id);
+        return view('folders.show', compact('folder', 'user'));    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $folder = Folder::find($id);
+        return view('folders.edit', compact('folder'));
     }
 
     /**
@@ -61,7 +63,15 @@ class FolderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $folder = Folder::find($id);
+
+        $folder->update([
+            'title'      =>  $request->title,
+            'content'     =>  $request->content,
+            'folder_id'   => $request->folder_id
+        ]);
+
+        return to_route('folders.show', $id);
     }
 
     /**
@@ -69,6 +79,8 @@ class FolderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $folder = Folder::find($id);
+        $folder->delete();
+        return to_route('folders.index');
     }
 }

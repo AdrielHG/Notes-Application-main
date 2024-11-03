@@ -16,7 +16,9 @@
         <thead>
             <tr>
                <th>ID</th> 
-               <th>Name</th> 
+               <th>Name</th>
+               <th>Actions</th>
+               <th>Delete</th>
             </tr>
         </thead>
 
@@ -25,6 +27,18 @@
                 <tr>
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
+                    <td>
+                        <a href="{{ route('users.show', $user->id) }}">See user</a>
+                        <a href="{{ route('users.edit', $user->id) }}">Edit user</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+
+                            <input type="submit" value="Delete user">
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

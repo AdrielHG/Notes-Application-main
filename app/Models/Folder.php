@@ -11,7 +11,7 @@ class Folder extends Model
 
     protected $table = "folders";
 
-    protected $fillable = ['name', 'color', 'user_id', 'categories_id'];
+    protected $fillable = ['name', 'color', 'user_id'];
 
     public function user(){
         return $this->belongsTo(User::class);

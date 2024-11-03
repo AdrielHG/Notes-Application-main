@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // and here your factories
-        Folder::factory(10)->create();
-        Note::factory(100)->create();
+        Folder::factory(5)->create();
+        Note::factory(10)->create();
     }
 }

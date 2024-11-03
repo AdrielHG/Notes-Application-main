@@ -15,10 +15,6 @@ return new class extends Migration
             $table->string('color', 6)->default('ff0000')->after('name');
             $table->string('name', 200)->change();
         });
-        
-        Schema::table('folders', function (Blueprint $table) {
-            $table->foreignId('categories_id')->constrained('categories')->after('user_id');
-        });
     }
 
     /**
@@ -29,11 +25,6 @@ return new class extends Migration
         Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('color');
             $table->string('name', 100)->change();
-        });
-
-        Schema::table('folders', function (Blueprint $table) {
-            $table->dropForeign(['categories_id']);
-            $table->dropColumn('categories_id');
         });
     }
 };

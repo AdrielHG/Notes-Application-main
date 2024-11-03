@@ -16,7 +16,9 @@
         <thead>
             <tr>
                <th>ID</th> 
-               <th>Title</th> 
+               <th>Title</th>
+               <th>Actions</th>
+               <th>Delete</th>
             </tr>
         </thead>
 
@@ -25,6 +27,18 @@
                 <tr>
                     <td>{{ $note->id }}</td>
                     <td>{{ $note->title }}</td>
+                    <td>
+                        <a href="{{ route('notes.show', $note->id) }}">See note</a>
+                        <a href="{{ route('notes.edit', $note->id) }}">Edit note</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('notes.destroy', $note->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+
+                            <input type="submit" value="Delete note">
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

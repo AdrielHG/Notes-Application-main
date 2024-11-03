@@ -16,7 +16,9 @@
         <thead>
             <tr>
                <th>ID</th> 
-               <th>Name</th> 
+               <th>Name</th>
+               <th>Actions</th>
+               <th>Delete</th>
             </tr>
         </thead>
 
@@ -25,6 +27,18 @@
                 <tr>
                     <td>{{ $folder->id }}</td>
                     <td>{{ $folder->name }}</td>
+                    <td>
+                        <a href="{{ route('folders.show', $folder->id) }}">See folder</a>
+                        <a href="{{ route('folders.edit', $folder->id) }}">Edit folder</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('folders.destroy', $folder->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+
+                            <input type="submit" value="Delete folder">
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
