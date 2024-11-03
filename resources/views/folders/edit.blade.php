@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.bootstrap')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('title', 'Folders')
+
+@section('content')
 
 <body>
 
@@ -23,11 +19,11 @@
             <input type="text" name="name" value="{{ $folder->name }}">
             <br> <br>
             <label for="">Color</label>
-            <input type="color" name="color" value="{{ $folder->color }}">
+            <input type="color" name="color" value="#{{ $folder->color }}">
             <br> <br>
             <input type="submit" value="Update folder">
         </div>
     </form>
 </body>
-
 </html>
+@endsection

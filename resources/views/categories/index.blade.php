@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-    <h1>All Categories</h1>
+@extends('layouts.bootstrap')
 
-    <a href="{{ route('categories.create') }}">Create new category</a>
+@section('title', 'All Categories')
 
-    <table>
-        <thead>
+@section('content')
+    <h1 class="text-center">All Categories</h1>
+    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Create New Category</a>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
             <tr>
-               <th>ID</th> 
-               <th>Name</th> 
-               <th>Actions</th>
-               <th>Delete</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -28,20 +22,18 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a href="{{ route('categories.show', $category->id) }}">See category</a>
-                        <a href="{{ route('categories.edit', $category->id) }}">Edit category</a>
+                        <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     </td>
                     <td>
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                             @csrf
-                            @method('delete')
-
-                            <input type="submit" value="Delete category">
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection

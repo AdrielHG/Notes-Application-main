@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-    <h1>All Folders</h1>
+@extends('layouts.bootstrap')
 
-    <a href="{{ route('folders.create') }}">Create new folder</a>
-    
-    <table>
-        <thead>
+@section('title', 'All Folders')
+
+@section('content')
+    <h1 class="text-center">All Folders</h1>
+    <a href="{{ route('folders.create') }}" class="btn btn-primary mb-3">Create New Folder</a>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
             <tr>
-               <th>ID</th> 
-               <th>Name</th>
-               <th>Actions</th>
-               <th>Delete</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -28,20 +22,18 @@
                     <td>{{ $folder->id }}</td>
                     <td>{{ $folder->name }}</td>
                     <td>
-                        <a href="{{ route('folders.show', $folder->id) }}">See folder</a>
-                        <a href="{{ route('folders.edit', $folder->id) }}">Edit folder</a>
+                        <a href="{{ route('folders.show', $folder->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('folders.edit', $folder->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     </td>
                     <td>
-                        <form action="{{ route('folders.destroy', $folder->id) }}" method="post">
+                        <form action="{{ route('folders.destroy', $folder->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                             @csrf
-                            @method('delete')
-
-                            <input type="submit" value="Delete folder">
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection
